@@ -25,7 +25,7 @@ const SocialBtn: FC<btnProps> = (props) => {
 
 interface IProps { };
 
-const Landing: FC<IProps> = (props) => {
+const Landing: FC<IProps> = () => {
     return (
         <div>
             <div className="flex gap-x-8">
