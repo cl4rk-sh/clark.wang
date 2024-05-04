@@ -49,15 +49,7 @@ const Landing: FC<IProps> = () => {
             <div className="flex-1 flex-col h-fit">
                 <h2 className="font-semibold text-left text-zinc-800 mt-auto">About Me</h2>
                 <p className="text-left text-lg text-zinc-600 mt-3">
-                    Hi, I'm Clark. I'm currently 15 years old, and I'm a web developer and student pilot. I've been coding for almost half my life. Over the years, I have explored game development, app design, and eventually decided to focus on web development. I am currently working at Stanford Medical School as a lab assistant, developing a database for neurodivergent individuals. I have a few side projects, and I am also working on a startup with my co-founder, Zach Derhake.
-                </p>
-            </div>
-
-            {/* What is this site for? */}
-            <div className="flex-1 flex-col h-fit mt-8">
-                <h2 className="font-semibold text-left text-zinc-800 mt-auto">What this site is and is not for? </h2>
-                <p className="text-left text-lg text-zinc-600 mt-3">
-                    This site serves as a platform to document my journey as a web developer and startup founder. I will be sharing my projects, thoughts, and experiences here. My goal is to look back on this site in a few years and see how much I've grown, while also hoping to inspire others to pursue their passions. (This is not a portfolio site, maybe I will build one in the future.)
+                    Hi, I'm Clark. I'm currently 16 years old, and I'm a web developer and student pilot. I've been coding for almost half my life. Over the years, I have explored game development, app design, and eventually decided to focus on web development. I am currently working at Stanford Medical School as a lab assistant, developing a database for neurodivergent individuals. I am currently CTO @ unhrd.xyz and also working on a real estate startup with Zach Derhake.
                 </p>
             </div>
         </div>
