@@ -49,11 +49,10 @@ const Landing: FC<IProps> = () => {
             <div className="flex-1 flex-col h-fit">
                 <h2 className="font-semibold text-left text-zinc-800 mt-auto">About Me</h2>
                 <p className="text-left text-lg text-zinc-600 mt-3">
-                    
-Hi, I'm Clark, a 16-year-old web developer and student pilot. I have been coding for nearly half my life, exploring various aspects of programming such as game development and app design. However, I eventually decided to focus on web development.
+                Hi, I’m Clark, a 16-year-old web developer and student pilot. I have been coding for over half of my life, and done things like game development and app design; however, I eventually decided to focus on web development. 
                 </p>
                 <p className="text-left text-lg text-zinc-600 mt-3">
-                Currently, I work as a lab assistant at Stanford Medical School, where I am developing a database for neurodivergent individuals. In addition to this role, I serve as the CTO at unhrd.xyz and collaborate with Zach Derhake on a real estate startup.
+                Currently, I work as a lab assistant for a professor at Stanford Medical School, where I am developing a database website for neurodivergent individuals. Additionally, I am serving as CTO at UNHRD.xyz and building a real estate startup with Zach Derhake. 
                 </p>
             </div>
         </div>
