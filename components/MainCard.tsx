@@ -60,7 +60,7 @@ export default function MainCard() {
           href="https://www.instagram.com/cl4rk.sh/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-2 duration-200 hover:drop-shadow-glow transition-all"
+          className="duration-300 hover:scale-125 hover:drop-shadow-glow transition-all"
         >
           <Instagram size={32} />
         </a>
@@ -68,7 +68,7 @@ export default function MainCard() {
           href="https://github.com/cl4rk-sh"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-2 duration-200 hover:drop-shadow-glow transition-all"
+          className="duration-300 hover:scale-125 hover:drop-shadow-glow transition-all"
         >
           <Github size={32} />
         </a>
@@ -76,7 +76,7 @@ export default function MainCard() {
           href="https://www.linkedin.com/in/clark-wang-aa729226a/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-2 duration-200 hover:drop-shadow-glow transition-all"
+          className="duration-300 hover:scale-125 hover:drop-shadow-glow transition-all"
         >
           <Linkedin size={32} />
         </a>
@@ -84,7 +84,7 @@ export default function MainCard() {
           href="https://www.youtube.com/channel/UCTRQvq12BjF7XZb3smtA1WA"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-2 duration-200 hover:drop-shadow-glow transition-all"
+          className="duration-300 hover:scale-125 hover:drop-shadow-glow transition-all"
         >
           <Youtube size={32} />
         </a>
@@ -92,7 +92,7 @@ export default function MainCard() {
           href="mailto:me@clark.wang"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:-translate-y-2 duration-200"
+          className="duration-300 hover:scale-125 hover:drop-shadow-glow transition-all"
         >
           <Mail size={32} />
         </a>
