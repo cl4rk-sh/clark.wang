@@ -90,12 +90,12 @@ export default function Home() {
                         </Paragraph>
                         <Button
                           onClick={handleEnter}
-                          variant="flat"
+                          variant="solid"
                           color="secondary"
                           className="text-white bg-blue-600 border-white shadow-lg shadow-white/20 mt-4"
                           size="lg"
                         >
-                          Click to Enter
+                          Click anywhere to enter
                         </Button>
                       </div>
                     </div>
