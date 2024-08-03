@@ -16,7 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className+" overflow-hidden"}>{children}</body>
+      <meta name="theme-color" content="#020617" />
+
+      <body className={inter.className + " overflow-hidden"}>{children}</body>
     </html>
   );
 }
