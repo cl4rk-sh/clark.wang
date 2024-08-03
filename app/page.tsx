@@ -50,7 +50,7 @@ export default function Home() {
           backgroundImage: "url('/background.svg')",
         }}
       >
-        <Snowfall color="rgba(224, 242, 254, 0.8)" snowflakeCount={300} />
+        <Snowfall color="rgba(224, 242, 254, 0.8)" snowflakeCount={680} />
         <div className="overflow-auto max-h-screen p-4">
           <AnimatePresence>
             {!entered && (
