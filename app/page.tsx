@@ -57,7 +57,7 @@ export default function Home() {
           wind={[-0.5, 1]}
         />
       </div>
-      <div className="p-4 min-h-screen flex items-center justify-center">
+      <div className="p-6 min-h-screen flex items-center justify-center">
         <AnimatePresence>
           {!entered && (
             <motion.div
