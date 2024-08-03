@@ -73,7 +73,7 @@ export default function Home() {
                       className="w-screen min-h-screen flex items-center justify-center"
                       onClick={handleEnter}
                     >
-                      <div className="max-w-[30rem] justify-center items-center flex flex-col">
+                      <div className="max-w-[30rem] justify-center items-center flex flex-col p-4">
                         <Image
                           src="/image.png"
                           alt="Clark Wang"
