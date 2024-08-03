@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      dropShadow: {
+        "glow": "0 0 10px rgba(255, 255, 255, 0.7)",
+      },
       colors: {
         border: "#e5e7eb",
         input: "#e5e7eb",
