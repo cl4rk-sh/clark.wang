@@ -15,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     // Simulate loading
-    setTimeout(() => setLoading(false), 250);
+    setTimeout(() => setLoading(false), 100);
 
     // Initialize audio
     if (typeof window !== "undefined") {
