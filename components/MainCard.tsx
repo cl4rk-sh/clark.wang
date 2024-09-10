@@ -35,7 +35,7 @@ export default function MainCard() {
             />
           </H4>
           <Paragraph className="text-white !font-extralight">
-            Hi, I'm Clark. I'm a 16-year-old web developer and a Junior in high
+            Hi, I'm Clark. I'm a 18-year-old web developer and currently in high
             school. I've been coding for over 8 years, focusing on web
             development for the past 2 years using NextJS as my preferred
             framework. I also have experience in backend development.
