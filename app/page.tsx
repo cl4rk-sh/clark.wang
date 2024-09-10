@@ -91,8 +91,7 @@ export default function Home() {
                         Welcome to my website
                       </H1>
                       <Paragraph className="text-white !font-extralight text-center">
-                        This is where I keep updated information about myself
-                        and where I am in life.
+                        This is where I keep updated information about myself.
                       </Paragraph>
                       <Button
                         onClick={handleEnter}
