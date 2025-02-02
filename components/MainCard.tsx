@@ -8,7 +8,7 @@ export default function MainCard() {
     <section className="max-w-[44rem] w-full bg-gradient-to-b from-slate-600/60 to-slate-800/60 backdrop-blur-lg rounded-2xl p-6 shadow-lg shadow-secondary/40">
       <div className="flex gap-5 max-sm:flex-col relative z-50">
         <Image
-          src="/image.png"
+          src="/image.jpg"
           alt="Clark Wang"
           width={120}
           height={120}
