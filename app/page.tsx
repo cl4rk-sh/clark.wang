@@ -81,7 +81,7 @@ export default function Home() {
                   >
                     <div className="max-w-[30rem] justify-center items-center flex flex-col p-4">
                       <Image
-                        src="/image.png"
+                        src="/image.jpg"
                         alt="Clark Wang"
                         width={120}
                         height={120}
