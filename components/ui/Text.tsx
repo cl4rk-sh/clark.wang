@@ -10,7 +10,7 @@ const baseStyles = "font-sans";
 const mutedStyle = "text-muted-foreground";
 
 const createTextComponent = (
-  Element: keyof JSX.IntrinsicElements,
+  Element: keyof React.JSX.IntrinsicElements,
   defaultStyles: string
 ) => {
   return React.forwardRef<HTMLElement, TextProps>(

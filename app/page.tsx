@@ -1,125 +1,99 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Loader2 } from "lucide-react";
-import { Button } from "@nextui-org/react";
-import { Snowfall } from "react-snowfall";
-import MainCard from "@/components/MainCard";
-import { H1, Paragraph } from "@/components/ui/Text";
-import Image from "next/image";
+
+import { useEffect, useRef } from 'react';
+import webGLFluidEnhanced from 'webgl-fluid-enhanced';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
-  const [entered, setEntered] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Framer motion values for smooth cursor tracking
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  // Smooth out the motion for that "liquid" trailing effect
+  const springConfig = { damping: 25, stiffness: 150, mass: 0.5 };
+  const cursorXSpring = useSpring(cursorX, springConfig);
+  const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Simulate loading
-    setTimeout(() => setLoading(false), 100);
-
-    // Initialize audio
-    if (typeof window !== "undefined") {
-      audioRef.current = new Audio(`${window.location.origin}/doomsday.mp3`);
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0.5;
-    }
-
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX - 24); // 24 is half the width (48px)
+      cursorY.set(e.clientY - 24); // 24 is half the height (48px)
+    };
+    
+    window.addEventListener('mousemove', moveCursor);
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
+      window.removeEventListener('mousemove', moveCursor);
+    };
+  }, [cursorX, cursorY]);
+
+  useEffect(() => {
+    let simulation: webGLFluidEnhanced | null = null;
+    
+    if (containerRef.current) {
+      simulation = new webGLFluidEnhanced(containerRef.current);
+      simulation.setConfig({
+        simResolution: 256,
+        dyeResolution: 1024,
+        captureResolution: 512,
+        densityDissipation: 1,
+        velocityDissipation: 0.2,
+        pressure: 0.8,
+        pressureIterations: 20,
+        curl: 5,
+        splatRadius: 0.25,
+        splatForce: 6000,
+        shading: true,
+        colorful: true,
+        colorUpdateSpeed: 10,
+        colorPalette: ['#000B18', '#00173D', '#002B5E', '#004A8F', '#0070C0', '#0099DE'],
+        hover: true,
+        backgroundColor: '#020617', // slate-950 dark glassy look
+        transparent: false,
+        bloom: true,
+        bloomIterations: 8,
+        bloomResolution: 256,
+        bloomIntensity: 0.6,
+        bloomThreshold: 0.4,
+        bloomSoftKnee: 0.7,
+        sunrays: true,
+        sunraysResolution: 196,
+        sunraysWeight: 0.5,
+      });
+      simulation.start();
+    }
+    
+    return () => {
+      if (simulation) {
+        simulation.stop();
       }
     };
   }, []);
 
-  const handleEnter = () => {
-    setEntered(true);
-    // Play audio when entering the site
-    if (audioRef.current) {
-      audioRef.current.play().catch((error) => {
-        console.error("Error playing audio:", error);
-      });
-    }
-  };
-
   return (
-    <main className="min-h-screen w-full relative bg-slate-950">
-      <div
-        className="fixed overflow-hidden w-full h-full bg-slate-950 bg-cover bg-center flex items-center justify-center"
+    <main className="min-h-screen w-full relative bg-slate-950 overflow-hidden m-0 p-0 !cursor-none">
+      <div 
+        ref={containerRef} 
+        className="w-screen h-screen block absolute inset-0 !cursor-none" 
+      />
+      
+      {/* Liquid Glass Ball Cursor */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-50 rounded-full"
         style={{
-          backgroundImage: "url('/background.svg')",
+          x: cursorXSpring,
+          y: cursorYSpring,
+          width: 48,
+          height: 48,
+          // Custom glassmorphism / liquid ball styling
+          background: 'radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 40%, rgba(255, 255, 255, 0.05) 70%, transparent 100%)',
+          boxShadow: 'inset 0 0 15px rgba(255, 255, 255, 0.4), inset -5px -5px 15px rgba(0, 0, 0, 0.3), 0 5px 20px rgba(0, 0, 0, 0.5)',
+          backdropFilter: 'blur(8px)',
+          WebkitBackdropFilter: 'blur(8px)',
+          border: '1px solid rgba(255, 255, 255, 0.15)',
         }}
-      >
-        <Snowfall
-          color="rgba(224, 242, 254, 0.7)"
-          snowflakeCount={680}
-          speed={[0.2, 0.8]}
-          wind={[-0.5, 1]}
-        />
-      </div>
-      <div className="p-6 min-h-screen flex items-center justify-center">
-        <AnimatePresence>
-          {!entered && (
-            <motion.div
-              initial={{ opacity: 1, scale: 1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.5 }}
-              transition={{ duration: 0.5 }}
-              className="fixed inset-0 flex items-center justify-center w-full h-full bg-slate-950"
-            >
-              {loading ? (
-                <Loader2 className="w-12 h-12 text-white animate-spin" />
-              ) : (
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.5 }}
-                >
-                  <div
-                    className="w-screen min-h-screen flex items-center justify-center"
-                    onClick={handleEnter}
-                  >
-                    <div className="max-w-[30rem] justify-center items-center flex flex-col p-4">
-                      <Image
-                        src="/image.jpg"
-                        alt="Clark Wang"
-                        width={120}
-                        height={120}
-                        className="rounded-xl aspect-square !w-28 !h-28 min-w-[112px] mb-4"
-                      />
-                      <H1 className="text-white text-center">
-                        Welcome to my website
-                      </H1>
-                      <Paragraph className="text-white !font-extralight text-center">
-                        This is where I keep updated information about myself.
-                      </Paragraph>
-                      <Button
-                        onClick={handleEnter}
-                        variant="solid"
-                        color="secondary"
-                        className="text-white bg-blue-600 border-white shadow-lg shadow-white/20 mt-4"
-                        size="lg"
-                      >
-                        Click anywhere to enter
-                      </Button>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {entered && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <MainCard />
-          </motion.div>
-        )}
-      </div>
+      />
     </main>
   );
 }

@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {}
-
-
+@layer base {
+  html, body {
+    background-color: #020617;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
