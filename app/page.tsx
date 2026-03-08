@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import webGLFluidEnhanced from 'webgl-fluid-enhanced';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Instagram, Github, Twitter } from 'lucide-react';
+import { Instagram, Github, Twitter, Mail } from 'lucide-react';
 
 const TypewriterText = ({ text, delay = 0, className = "" }: { text: string, delay?: number, className?: string }) => {
   const letters = Array.from(text);
@@ -50,6 +50,7 @@ const TypewriterText = ({ text, delay = 0, className = "" }: { text: string, del
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [hasStarted, setHasStarted] = useState(false);
 
   // Framer motion values for smooth cursor tracking
   const cursorX = useMotionValue(-100);
@@ -148,6 +149,7 @@ export default function Home() {
       <div 
         ref={containerRef} 
         className="w-screen h-screen block absolute inset-0 z-10 !cursor-none" 
+        onClick={() => setHasStarted(true)}
       />
       
       {/* Texture Noise Overlay */}
@@ -158,74 +160,95 @@ export default function Home() {
         }}
       />
       
-      {/* Liquid Glass Typewriter Text */}
-      <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="max-w-4xl w-full relative"
-          style={{
-            fontFamily: 'var(--font-instrument-serif), serif',
-          }}
-        >
-          <div className="relative z-10 space-y-6">
-            <TypewriterText 
-              text="Hi," 
-              delay={0.5} 
-              className="text-4xl md:text-5xl text-white/90"
-            />
-            <TypewriterText 
-              text="I'm Clark Wang." 
-              delay={1.5} 
-              className="text-6xl md:text-8xl font-medium text-white tracking-tight"
-            />
-            <TypewriterText 
-              text="Documenting my life soon." 
-              delay={3.5} 
-              className="text-3xl md:text-4xl text-white/70 italic"
-            />
-          </div>
-
-          {/* Social Links */}
-          <motion.div 
+      {/* Initial Landing State */}
+      {!hasStarted && (
+        <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 4.5, duration: 1 }}
-            className="flex items-center gap-6 mt-12 pointer-events-auto"
+            exit={{ opacity: 0 }}
+            className="flex flex-col items-center gap-4"
           >
-            <motion.a
-              href="https://www.instagram.com/cl4rk.sh/"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg"
+            <motion.p
+              animate={{ opacity: [0.5, 0.8, 0.5] }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+              className="text-white text-[20px] tracking-[0.4em] font-medium uppercase"
+              style={{ fontFamily: 'var(--font-inter), sans-serif' }}
             >
-              <Instagram size={24} />
-            </motion.a>
-            <motion.a
-              href="https://github.com/cl4rk-sh"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg"
-            >
-              <Github size={24} />
-            </motion.a>
-            <motion.a
-              href="https://x.com/cl4rk_sh"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg"
-            >
-              <Twitter size={24} />
-            </motion.a>
+              Click to get started
+            </motion.p>
           </motion.div>
-        </motion.div>
+        </div>
+      )}
+      
+      {/* Liquid Glass Typewriter Text */}
+      <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none px-6">
+        {hasStarted && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="max-w-4xl w-full relative"
+            style={{
+              fontFamily: 'var(--font-instrument-serif), serif',
+            }}
+          >
+            <div className="relative z-10 space-y-6">
+              <TypewriterText 
+                text="Hi," 
+                delay={0.5} 
+                className="text-4xl md:text-5xl text-white/90"
+              />
+              <TypewriterText 
+                text="I'm Clark Wang." 
+                delay={1.5} 
+                className="text-6xl md:text-8xl font-medium text-white tracking-tight"
+              />
+              <TypewriterText 
+                text="Documenting my life soon." 
+                delay={3.5} 
+                className="text-3xl md:text-4xl text-white/70 italic"
+              />
+            </div>
+
+            {/* Social Links */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 4.5, duration: 1 }}
+              className="flex items-center gap-6 mt-12 pointer-events-auto"
+            >
+              <motion.a
+                href="mailto:me@clark.wang"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg"
+              >
+                <Mail size={24} />
+              </motion.a>
+              <motion.a
+                href="https://www.instagram.com/cl4rk.sh/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg"
+              >
+                <Instagram size={24} />
+              </motion.a>
+              <motion.a
+                href="https://x.com/cl4rk_sh"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.1, y: -2 }}
+                whileTap={{ scale: 0.9 }}
+                className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md shadow-lg"
+              >
+                <Twitter size={24} />
+              </motion.a>
+            </motion.div>
+          </motion.div>
+        )}
       </div>
 
       {/* Liquid Glass Ball Cursor */}
