@@ -169,21 +169,21 @@ export default function Home() {
             fontFamily: 'var(--font-instrument-serif), serif',
           }}
         >
-          <div className="relative z-10 space-y-4">
+          <div className="relative z-10 space-y-6">
             <TypewriterText 
               text="Hi," 
               delay={0.5} 
               className="text-4xl md:text-5xl text-white/90"
             />
             <TypewriterText 
-              text="My name is Clark." 
+              text="I'm Clark Wang." 
               delay={1.5} 
-              className="text-5xl md:text-7xl font-medium text-white tracking-tight"
+              className="text-6xl md:text-8xl font-medium text-white tracking-tight"
             />
             <TypewriterText 
               text="Documenting my life soon." 
               delay={3.5} 
-              className="text-2xl md:text-3xl text-white/70 italic"
+              className="text-3xl md:text-4xl text-white/70 italic"
             />
           </div>
 
